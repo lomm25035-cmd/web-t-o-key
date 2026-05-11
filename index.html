@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FF Panel</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial;
+  background: radial-gradient(circle, #001, #000);
+  color: white;
+}
+
+/* ===== LOCK ===== */
+#lockScreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.box {
+  width: 90%;
+  max-width: 350px;
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(0,0,0,0.85);
+  box-shadow: 0 0 25px #00eaff;
+}
+
+h2 {
+  text-align: center;
+  color: #00eaff;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: none;
+  background: #001;
+  color: #00eaff;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-blue {
+  background: linear-gradient(45deg,#00eaff,#0077ff);
+  color: white;
+}
+
+.btn-red {
+  background: red;
+  color: white;
+}
+
+.status {
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* ===== MAIN ===== */
+#mainScreen {
+  display: none;
+  padding: 15px;
+}
+
+.card {
+  background: rgba(0,0,0,0.85);
+  border-radius: 20px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 0 20px #00eaff;
+}
+
+.title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.slider {
+  width: 100%;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔐 LOCK -->
+<div id="lockScreen">
+  <div class="box">
+    <h2>⚡ Aim Head V2</h2>
+
+    <input id="keyInput" placeholder="Nhập key...">
+
+    <div class="row">
+      <button class="btn-blue" onclick="checkKey()">Check</button>
+      <button class="btn-red" onclick="clearKey()">Xóa</button>
+    </div>
+
+    <button class="btn-blue" onclick="goGetKey()">Get Key</button>
+
+    <div class="status" id="status">Đang chờ...</div>
+  </div>
+</div>
+
+<!-- 🎮 MAIN -->
+<div id="mainScreen">
+
+  <div class="card">
+    <div class="title">🎯 Tỉ lệ Headshot</div>
+    <input type="range" min="0" max="100" value="75" class="slider">
+  </div>
+
+  <div class="card">
+    <div class="title">⚙️ Log Control</div>
+    <input type="range" min="0" max="100" value="100" class="slider">
+  </div>
+
+  <div class="card">
+    <div class="title">📱 Android</div>
+    <button class="btn-blue">Bật Android</button>
+  </div>
+
+  <div class="card">
+    <div class="title">🍎 iOS</div>
+    <button class="btn-blue">Bật iOS</button>
+  </div>
+
+</div>
+
+<script>
+// ===== CHECK KEY =====
+function checkKey() {
+  let input = document.getElementById("keyInput").value;
+
+  // lấy key từ web tạo key
+  let savedKey = localStorage.getItem("generatedKey");
+
+  if (!savedKey) {
+    document.getElementById("status").innerText = "⚠️ Chưa có key (bấm Get Key)";
+    return;
+  }
+
+  if (input === savedKey) {
+    // mở khóa
+    document.getElementById("lockScreen").style.display = "none";
+    document.getElementById("mainScreen").style.display = "block";
+  } else {
+    document.getElementById("status").innerText = "❌ Key sai";
+  }
+}
+
+// ===== CLEAR =====
+function clearKey() {
+  document.getElementById("keyInput").value = "";
+}
+
+// ===== MỞ WEB TẠO KEY =====
+function goGetKey() {
+  window.open("https://lomm25035-cmd.github.io/webclip/");
+}
+</script>
+
+</body>
+</html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  overflow-x:hidden;
+}
